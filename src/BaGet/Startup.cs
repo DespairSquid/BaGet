@@ -37,7 +37,7 @@ namespace BaGet
             services.AddTransient<IConfigureOptions<IISServerOptions>, ConfigureBaGetOptions>();
             services.AddTransient<IValidateOptions<BaGetOptions>, ConfigureBaGetOptions>();
 
-            services.AddBaGetOptions<IISServerOptions>(nameof(IISServerOptions));
+            //services.AddBaGetOptions<IISServerOptions>(nameof(IISServerOptions));
             services.AddBaGetWebApplication(ConfigureBaGetApplication);
 
             // You can swap between implementations of subsystems like storage and search using BaGet's configuration.
@@ -57,21 +57,22 @@ namespace BaGet
         private void ConfigureBaGetApplication(BaGetApplication app)
         {
             // Add database providers.
-            app.AddAzureTableDatabase();
-            app.AddMySqlDatabase();
-            app.AddPostgreSqlDatabase();
+            //app.AddAzureTableDatabase();
+            //app.AddMySqlDatabase();
+            //app.AddPostgreSqlDatabase();
             app.AddSqliteDatabase();
-            app.AddSqlServerDatabase();
+            //app.AddSqlServerDatabase();
 
             // Add storage providers.
             app.AddFileStorage();
-            app.AddAliyunOssStorage();
-            app.AddAwsS3Storage();
-            app.AddAzureBlobStorage();
-            app.AddGoogleCloudStorage();
+            //app.AddAliyunOssStorage();
+            //app.AddAwsS3Storage();
+            //app.AddAzureBlobStorage();
+            //app.AddGoogleCloudStorage();
 
             // Add search providers.
-            app.AddAzureSearch();
+            app.AddNullSearch();
+            //app.AddAzureSearch();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
