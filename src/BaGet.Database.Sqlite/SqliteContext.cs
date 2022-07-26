@@ -1,6 +1,7 @@
 using BaGet.Core;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace BaGet.Database.Sqlite
 {
@@ -19,6 +20,14 @@ namespace BaGet.Database.Sqlite
         {
             return exception.InnerException is SqliteException sqliteException &&
                 sqliteException.SqliteErrorCode == SqliteUniqueConstraintViolationErrorCode;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.ConfigureWarnings(w =>
+                w.Throw(RelationalEventId.MultipleCollectionIncludeWarning));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
