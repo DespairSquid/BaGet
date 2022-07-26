@@ -15,7 +15,10 @@ namespace BaGet
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
 
-                options.UseSqlite(databaseOptions.Value.ConnectionString);
+                options.UseSqlite(databaseOptions.Value.ConnectionString, b =>
+                {
+                    b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                });
             });
 
             return app;
